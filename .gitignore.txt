@@ -1,9 +1,0 @@
-# MATLAB autosaves & backups
-*.asv
-*.m~
-*.mat.backup
-*.autosave
-
-#MATLAB Crash Logs
-matlab_crash_dump.*
-
