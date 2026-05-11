@@ -6,3 +6,6 @@
 
 #MATLAB Crash Logs
 matlab_crash_dump.*
+
+#Ignore CSV
+Data/*.csv
