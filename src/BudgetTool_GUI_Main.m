@@ -12,7 +12,7 @@ function handles = BudgetTool_GUI_Main()
     % Initialize the GUI parent figure. 
     % ---------------------------------------------------------------------
 
-    fig = uifigure( ...
+    fig = uifigure( ...e
         'Name',     'Budget_Utility', ...
         'Position', [100 100 420 340], ...
         'Resize',   'off', ...
@@ -99,7 +99,7 @@ function handles = BudgetTool_GUI_Main()
         'FontWeight',       'bold', ...
         'BackgroundColor',  [0.20 0.45 0.75], ...
         'FontColor',        [1 1 1], ...
-        'ButtonPushedFcn',  @(btn,evt) cb_specifyOutputDir(handles) ...
+        'ButtonPushedFcn',  @(btn,evt) cb_selectOutputDir(handles) ...
      );
 
     % ---------------------------------------------------------------------
@@ -146,27 +146,54 @@ function handles = BudgetTool_GUI_Main()
         'ButtonPushedFcn',  @(btn,evt) cb_analyzeTransactions(handles) ...
     );
 
+    % =========================================================================
+    % CALLBACKS for Button Events
+    % =========================================================================
+            
+    function cb_selectOutputDir(handles)
+        % Call helper script - opens the folder picker and tereturn the
+        % path or '' if user cancelled. 
+
+        chosenDir = selectOutputDir();
+
+        if isempty(chosenDir)
+            % user hit cancel - leave everything as it was. 
+            return;
+        end
+
+        fprintf('[cb_selectOutputDir] set to: %s\n', chosenDir)
+
+    end
+
+    function cb_loadTransactionFile(handles)
+        % Call helper script - opens the file picker, returns full path
+        % or '' on cancel. 
+
+        chosenFile = loadTransactionFile();
+
+        if isempty(chosenFile)
+            return; % user cancelled - do nothing. 
+        end
+
+        % Pin the path to the shared 'whiteboard.' 
+        setappdata(fig, 'transactionFile', chosenFile);
+
+        % Give visual feedback: flash the button text to show the filename. 
+        [~, fname, ext] = fileparts(chosenFile); % split path / folder / name/ .ext
+        handles.btnLoadTransactions.Text = ['Loaded: ',fname, ext]; 
+
+        fprintf('[cb_loadTrnsactionFile] File set to: %s\n', chosenFile);
+
+    end % cb_loadTransactionFile
+
+
+
+    function cb_analyzeTransactions(handles)
+        % TODO - Define Callback
+        disp('[cb_analyzeTransactions not yet defined.')
+    end
 
 end % Budget_Tool_GUI_Main
-
-% =========================================================================
-% CALLBACKS for Button Events
-% =========================================================================
-            
-function cb_specifyOutputDir(handles)
-    % TODO - Define Callback
-    disp('[cb_specifyOutputDir] not yet defined.')
-end
-
-function cb_loadTransactionFile(handles)
-    % TODO - Define Callback
-    disp('[cb_loadTransactionFile] not yet defined.')
-end
-
-function cb_analyzeTransactions(handles)
-    % TODO - Define Callback
-    disp('[cb_analyzeTransactions not yet defined.')
-end
 
 
 
