@@ -160,8 +160,18 @@ function handles = BudgetTool_GUI_Main()
             % user hit cancel - leave everything as it was. 
             return;
         end
+        
+        % Save to the shared whiteboard so cb_analyzeTransactions can read
+        % it later. 
+        setappdata(fig, 'outputDir', chosenDir);
+
+        % Update text area to display file path
+        handles.outputDirField.Value = chosenDir;
 
         fprintf('[cb_selectOutputDir] set to: %s\n', chosenDir)
+
+        drawnow;
+        figure(fig);
 
     end
 

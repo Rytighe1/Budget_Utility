@@ -10,8 +10,9 @@ function selectedDir = selectOutputDir()
     % Convert that to '' so callers always get a string back. 
 
     if isequal (selectedDir, 0)
-        selectedDir = '';
+        selectedDir = ''; %User canceled. 
     end
+    
 
 end
 
