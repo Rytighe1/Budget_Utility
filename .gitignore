@@ -9,3 +9,4 @@ matlab_crash_dump.*
 
 #Ignore CSV
 Data/*.csv
+Data/*.xlsx
